@@ -1,0 +1,170 @@
+﻿@model GSA_Auctions_app1.Models.IndexView
+
+@{
+    ViewData["Title"] = "Search Listing";
+}
+<style>
+    table {
+        border-collapse: separate;
+        border-spacing: 0;
+        color: white;
+        font: 10px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    th,
+    td {
+        padding: 5px 5px;
+        vertical-align: middle;
+    }
+
+    thead {
+        background: #395870;
+        color: #fff;
+    }
+
+    th {
+        font-weight: bold;
+    }
+
+        th:first-child {
+            text-align: left;
+        }
+
+    tbody tr:nth-child(even) {
+        background: rgb(110, 106, 106);
+    }
+
+    td {
+        border-bottom: 1px solid #cecfd5;
+        border-right: 1px solid #cecfd5;
+    }
+
+        td:first-child {
+            border-left: 1px solid #cecfd5;
+        }
+</style>
+<h1 style="color:white !important">Search Listing</h1>
+
+<body style="background-color:rgb(28,73,28)">
+    <form asp-controller="Home" asp-action="stateAuction" method="post" style="font-size:small !important">
+        <span style="color:white;font-weight:bolder;padding-right:5px">State:</span>
+        <select name="state" style="width:60px;color:black;font-weight:bolder">
+            @foreach (var item in Model.state)
+        {
+            <option value=@item class="selector">@item</option>
+        }
+        </select>
+        <span style="color:white;font-weight:bolder;padding-right:5px">Auction Start Date:</span>
+        <input type="date" name="startDate" style="width:75px;color:black;font-weight:bolder"/>
+        <span style="color:white;font-weight:bolder;padding-right:5px">Auction End Date:</span>
+        <input type="date" name="endDate" style="width:75px;color:black;font-weight:bolder"/>
+        <span style="color:white;font-weight:bolder;padding-right:5px">Bidding Amount Min:</span>
+        <input type="number" name="biddingAmount1" placeholder="Amount" style="width:75px;color:black;font-weight:bolder"/>
+        <span style="color:white;font-weight:bolder;padding-right:5px">Bidding Amount Max:</span>
+        <input type="number" name="biddingAmount2" placeholder="Amount" style="width:75px;color:black;font-weight:bolder"/>
+        <input type="submit" value="Submit" />
+    </form>
+    <table class="auction-listing">
+        <thead>
+            <tr>
+                <th scope="col">
+                    SaleNo
+                </th>
+                <th scope="col">
+                    LotNo
+                </th>
+                <th scope="col">
+                    AucStartDt
+                </th>
+                <th scope="col">
+                    AucEndDt
+                </th>
+                <th scope="col">
+                    ItemName
+                </th>
+                <th scope="col">
+                    AuctionStatus
+                </th>
+                <th scope="col">
+                    SaleLocation
+                </th>
+                <th scope="col">
+                    LocationCity
+                </th>
+                <th scope="col">
+                    LocationST
+                </th>
+                <th scope="col">
+                    LocationZip
+                </th>
+                <th scope="col">
+                    BiddersCount
+                </th>
+
+                <th scope="col">
+                    AucIncrement
+                </th>
+                <th scope="col">
+                    HighBidAmount
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.auctionList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LotNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AucStartDt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AucEndDt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuctionStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleLocation)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationST)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocationZip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BiddersCount)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AucIncrement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HighBidAmount)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</body>
+<script>
+
+    alertDbSave(@ViewBag.dbSuccessComp);
+</script>
